@@ -16,6 +16,22 @@ class App extends Component {
     name: "",
     number: "",
   };
+  componentDidMount() {
+    const contacts = JSON.parse(localStorage.getItem("contacts"));
+    // console.log(contacts === null);
+    if (contacts !== null) {
+      // console.log(contacts);
+      this.setState({ contacts: [...contacts] });
+    }
+  }
+  componentDidUpdate(prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      // console.log(this.state.contacts === prevState.contacts);
+      // console.log(prevState.contacts);
+      // console.log(this.state.contacts);
+      localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
+    }
+  }
   filterHendler = ({ filter }) => {
     this.setState({ filter: filter });
   };
